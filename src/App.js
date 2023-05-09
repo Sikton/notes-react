@@ -7,31 +7,28 @@ import { NoteContext } from './Context/NoteContext';
 import Navbar from './components/Navbar/Navbar';
 
 function App() {
-  const [notes, setNotes] = useState([
-    { id: 1, title: 'rr', body: 'raketa9' },
-    { id: 2, title: 'con', body: 'okolo2' },
-    { id: 3, title: 'boom3', body: 'boomda3' },
-    { id: 4, title: 'solo4', body: 'solovan4' },
-  ]);
+  const [notes, setNotes] = useState([]);
+  const [lastNote, setLastNote] = useState(0);
 
   const addNote = () => {
     const newNote = {
       id: uuidv4(),
-      title: '',
+      title: 'Title',
       body: '',
+      date: Date.now(),
     };
 
-    console.log('notes-okk-1', notes);
     setNotes([newNote, ...notes]);
+    setLastNote(newNote.id);
+    console.log('addnotes', notes);
   };
-  console.log('notes-okk-2', notes);
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
   }, [notes]);
 
   const onUpdateNote = (updatedNote) => {
-    const updatedNotesArr = notes.map((note) => {
+    const updatedNotes = notes.map((note) => {
       if (note.id === updatedNote.id) {
         return updatedNote;
       }
@@ -39,14 +36,31 @@ function App() {
       return note;
     });
 
-    setNotes(updatedNotesArr);
+    setNotes(updatedNotes);
+  };
+
+  const deleteNotes = (id) => {
+    const newNotes = notes.filter((note) => note.id !== id);
+    setNotes(newNotes);
+  };
+
+  const findActiveNote = () => {
+    return notes.find(({ id }) => id === lastNote);
   };
 
   return (
     <div className="container">
       <NoteContext.Provider
-        // value={{ notes, selectedNote, updateNote, addNote }}
-        value={{ notes, setNotes, addNote }}
+        value={{
+          notes,
+          setNotes,
+          setLastNote,
+          lastNote,
+          addNote,
+          onUpdateNote,
+          findActiveNote,
+          deleteNotes,
+        }}
       >
         <Navbar />
         <div className="mainspace">

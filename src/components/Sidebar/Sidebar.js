@@ -1,19 +1,21 @@
 import s from './Sidebar.module.css';
 import { useContext, useState } from 'react';
 import { NoteContext } from '../../Context/NoteContext';
+import ListItem from './ListItem';
 
 const Sidebar = () => {
   const note = useContext(NoteContext);
-  console.log('notessite', note);
+
+  const activNote = (id) => {
+    note.setLastNote(id);
+    console.log('ok', id);
+  };
+  
   return (
     <div className={s.sidebar}>
-      sidebar
       {note.notes &&
-        note.notes.map((el) => (
-          <ul>
-            <li>{el.title}</li>
-            <li>{el.body}</li>
-          </ul>
+        note.notes.map((item) => (
+          <ListItem activNote={activNote} key={item.id} item={item} />
         ))}
     </div>
   );
