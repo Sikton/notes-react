@@ -9,6 +9,7 @@ import Navbar from './components/Navbar/Navbar';
 function App() {
   const [notes, setNotes] = useState([]);
   const [lastNote, setLastNote] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
   const addNote = () => {
     const newNote = {
@@ -20,7 +21,7 @@ function App() {
 
     setNotes([newNote, ...notes]);
     setLastNote(newNote.id);
-    console.log('addnotes', notes);
+    setIsActive(true);
   };
 
   useEffect(() => {
@@ -39,9 +40,19 @@ function App() {
     setNotes(updatedNotes);
   };
 
+  const changeActiveNote = (id) => {
+    console.log('tets');
+    setLastNote(id);
+    setIsActive(false);
+  };
+
   const deleteNotes = (id) => {
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
+  };
+
+  const editNote = () => {
+    setIsActive(true);
   };
 
   const findActiveNote = () => {
@@ -60,6 +71,9 @@ function App() {
           onUpdateNote,
           findActiveNote,
           deleteNotes,
+          isActive,
+          editNote,
+          changeActiveNote,
         }}
       >
         <Navbar />

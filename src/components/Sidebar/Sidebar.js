@@ -7,10 +7,10 @@ const Sidebar = () => {
   const note = useContext(NoteContext);
 
   const activNote = (id) => {
-    note.setLastNote(id);
-    console.log('ok', id);
+    note.changeActiveNote(id);
+    console.log('id', id);
   };
-  
+
   return (
     <div className={s.sidebar}>
       {note.notes &&

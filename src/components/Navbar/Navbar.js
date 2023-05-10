@@ -5,11 +5,12 @@ import { NoteContext } from '../../Context/NoteContext';
 const Navbar = () => {
   const note = useContext(NoteContext);
 
-  console.log('note.lastNote', note.lastNote);
+
   return (
     <div className={s.navbar}>
       <button onClick={note.addNote}>add</button>
       <button onClick={() => note.deleteNotes(note.lastNote)}>delete</button>
+      <button onClick={() => note.editNote()}>fix</button>
     </div>
   );
 };

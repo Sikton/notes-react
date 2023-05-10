@@ -15,31 +15,33 @@ const Workspace = () => {
   };
 
   if (!note.findActiveNote()) {
-    return <div className="no-active-note">No Active Note</div>;
+    return <div className={s.noActiveNote}>No Active Note</div>;
   }
 
   return (
     <div className={s.workspace}>
       {note.notes.title}
       <div className={s.main}>
-        <div className={s.noteEdit}>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="Note Title"
-            // value={note.findActiveNote().title}
-            onChange={editNote}
-            autoFocus
-          />
-          <textarea
-            id="body"
-            name="body"
-            placeholder="Write your note here..."
-            value={note.findActiveNote().body}
-            onChange={editNote}
-          />
-        </div>
+        {note.isActive && (
+          <div className={s.noteEdit}>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Note Title"
+              onChange={editNote}
+              autoFocus
+            />
+            <textarea
+              id="body"
+              name="body"
+              placeholder="Write your note here..."
+              value={note.findActiveNote().body}
+              onChange={editNote}
+            />
+          </div>
+        )}
+
         <div className={s.notePreview}>
           <h1 className="preview-title">{note.findActiveNote().title}</h1>
           <ReactMarkdown className="markdown-preview">

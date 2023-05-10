@@ -1,0 +1,7 @@
+.sideBarNote {
+  border: 1px solid gray;
+}
+
+.active {
+    background-color: gray;
+}

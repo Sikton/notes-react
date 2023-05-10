@@ -1,22 +1,21 @@
 .workspace {
   flex: 65%;
   border: 1px solid gray;
+  width: 70%;
 }
 
 .main {
   width: 70%;
   height: 100vh;
 }
+
 .noteEdit,
 .notePreview {
-  height: 50vh;
+  height: 30vh;
 }
 
-.no-active-note {
-  width: 70%;
+.noActiveNote {
+  /* width: 70%; */
+  border: 1px solid gray;
   height: 100vh;
-  line-height: 100vh;
-  text-align: center;
-  font-size: 2rem;
-  color: #999;
 }
